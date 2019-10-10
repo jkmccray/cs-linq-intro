@@ -149,17 +149,18 @@ namespace linq
             List<Customer> listOfMillionaires = customers.Where(c => c.Balance >= 1000000).ToList();
 
             var millionairesPerBank = listOfMillionaires.GroupBy(
-                c => c.Bank,
+                millionaire => millionaire.Bank,
+                millionaire => millionaire,
                 (key, value) => new
                 {
                     BankName = key,
-                    Millionaires = value.Count()
+                    MillionaireCount = value.Count()
                 });
 
 
             foreach (var count in millionairesPerBank)
             {
-                // Console.WriteLine($"{count.BankName}: {count.Millionaires}");
+                // Console.WriteLine($"{count.BankName}: {count.MillionaireCount}");
             }
 
             // ----- CHALLENGE: Introduction to Joining Two Related Collections -----
